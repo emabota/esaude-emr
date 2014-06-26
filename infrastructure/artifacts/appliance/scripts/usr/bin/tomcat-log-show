@@ -1,0 +1,6 @@
+#!/bin/bash
+
+read -p "Press [Enter] to show real time log. Press [Ctrl+C] to return to menu."
+sudo tail -f /var/log/tomcat7/catalina.out
+
+/usr/bin/show-menu

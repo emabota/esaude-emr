@@ -1,0 +1,17 @@
+#!/bin/sh
+if [ "$METHOD" = loopback ]; then
+    exit 0
+fi
+
+# Only run from ifup.
+if [ "$MODE" != start ]; then
+    exit 0
+fi
+
+ip=$(/usr/bin/get-ip-address)
+
+if [ "$ip" = "" ]; then
+	sed -ri"" "s/http:\/\/.*:8080/http:\/\/IP_ADDRESS:8080/g" /etc/issue
+else
+	sed -ri"" "s/http:\/\/.*:8080/http:\/\/$ip:8080/g" /etc/issue
+fi

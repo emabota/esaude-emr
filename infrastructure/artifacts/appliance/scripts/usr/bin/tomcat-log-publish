@@ -1,0 +1,9 @@
+#!/bin/bash
+
+date=$(date +%d-%m-%y_%Hh%Mm%Ss)
+
+sudo zip -9 /var/www/files/Tomcat\ Logs/tomcat-log-$date.zip /var/log/tomcat7/catalina.out
+
+read -p "Press [Enter] to return to menu..." 
+
+/usr/bin/show-menu

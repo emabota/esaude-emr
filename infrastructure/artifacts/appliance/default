@@ -1,0 +1,17 @@
+<VirtualHost *:80>
+	DocumentRoot /var/www
+	<Directory /var/www/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	<Location /files>
+		DAV On
+		AuthType Basic
+		AuthName "Please log in to view eSaude EMR files"
+		AuthUserFile /etc/apache2/passwd.dav
+		Require valid-user
+	</Location>
+</VirtualHost>

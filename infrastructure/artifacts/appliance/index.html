@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <title>eSaude EMR</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    body {
+      padding-top: 150px;
+      color: #5a5a5a;
+    }
+    </style>
+    <script>
+      function redirect(site) {
+
+        var url = document.URL;
+        var ipRe = new RegExp("[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}", "g")
+
+        if(console.log(url.indexOf('localhost:8282') > - 1)) {
+          if (site === "emr") {
+              window.location.href = "http://localhost:8181/";
+          } else if (site === "files") {
+              window.location.href = "http://localhost:8282/files";
+          } 
+        } else {
+          var ip = ipRs.exec(url)[0];
+
+          if (site === "emr") {
+              window.location.href = "http://" + ip + ":8080/"
+          } else if (site === "files") {
+             window.location.href = "http://" + ip + "/files"
+          } 
+        }
+        console.log(document.URL);
+      }
+    </script>
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>  
+    <div class="container marketing">
+      <div class="row">
+        <div class="col-lg-6">
+          <center>
+            <a href="#">
+              <img src="img/esaude-emr.png" alt="eSaude EMR" height="250px" onClick="redirect('emr');">
+              <h2>eSaude EMR</h2>
+            </a>
+          </center>
+        </div>
+        <div class="col-lg-6">
+          <center>
+            <a href="#">
+              <img src="img/files.jpg" alt="eSaude EMR" height="250px" onClick="redirect('files');">
+              <h2>Backups & Log Files</h2>
+            </a>
+          </center>
+        </div>
+      </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

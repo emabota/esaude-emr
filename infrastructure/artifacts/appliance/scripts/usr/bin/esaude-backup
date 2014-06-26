@@ -1,0 +1,16 @@
+#!/bin/bash
+
+date=$(date +%d-%m-%y_%Hh%Mm%Ss)
+
+# Dump the database
+mysqldump -uesaude -pesaude openmrs > esaude-backup-$date.sql
+
+# Add compressed version to WebDAV
+sudo zip -9 /var/www/files/Database\ Backups/esaude-backup-$date.sql.zip esaude-backup-$date.sql
+
+# Remove uncompressed version
+rm esaude-backup-$date.sql
+
+read -p "Press [Enter] to return to menu..." 
+
+/usr/bin/show-menu

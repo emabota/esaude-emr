@@ -1,0 +1,11 @@
+#!/bin/bash
+
+read -p "Are you sure? This will [31;40;01mDELETE ALL[m saved eSaude EMR backups and Tomcat logs.
+[y/N]: " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	sudo rm -f /var/www/files/Tomcat\ Logs/*
+	sudo rm -f /var/www/files/Database\ Backups/*
+fi
+
+/usr/bin/show-menu

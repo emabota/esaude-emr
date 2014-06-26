@@ -1,0 +1,81 @@
+{
+
+      "description": "Packer template for the eSaude EMR appliance",
+  "builders": [
+    {
+      "name": "esaude-emr",
+      "type": "virtualbox-iso",
+      "guest_os_type": "Ubuntu",
+      "iso_url": "ubuntu-12.04.4-server-i386.iso",
+      "http_directory": "../artifacts/appliance",
+      "iso_checksum": "32184a83c8b5e6031e1264e5c499bc03",
+      "iso_checksum_type": "md5",
+      "ssh_username": "esaude",
+      "ssh_password": "esaude",
+      "ssh_wait_timeout": "10m",
+      "disk_size": "8000",
+      "format": "ova",
+      "headless": "false",
+      "vboxmanage": [
+          ["modifyvm", "{{.Name}}", "--memory", "1024"],
+          ["modifyvm", "{{.Name}}", "--vram", "10"],
+          ["modifyvm", "{{.Name}}", "--nic1", "nat"],
+          ["modifyvm", "{{.Name}}", "--natpf1", "tomcat,tcp,,8181,,8080"],
+          ["modifyvm", "{{.Name}}", "--natpf1", "apache,tcp,,8282,,80"],
+          ["modifyvm", "{{.Name}}", "--nic2", "bridged"],
+          ["modifyvm", "{{.Name}}", "--bridgeadapter2", "en0"],
+          ["modifyvm", "{{.Name}}", "--nicpromisc2", "allow-all"]
+      ],
+      "boot_command": [
+                "<esc><esc><enter><wait>",
+                "/install/vmlinuz noapic ",
+                "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/esaude-emr-preseed.cfg ",
+                "debian-installer=en_ZA auto locale=en_ZA kbd-chooser/method=us ",
+                "hostname=esaude-emr ",
+                "interface=eth0 ",
+                "fb=false debconf/frontend=noninteractive ",
+                "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+                "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+                "initrd=/install/initrd.gz -- <enter>"
+      ],
+      "shutdown_command": "echo 'esaude' | sudo -S shutdown -P now",
+      "vboxmanage_post": [
+      	["modifyhd", "{{pwd}}/output-esaude-emr/{{.Name}}.vdi", "--compact"]
+      ]
+    }
+  ],
+    "provisioners": [
+    {
+    	"type": "shell",
+    	"inline": [
+    		"echo 'esaude' | sudo -E -S bash -xcv 'mkdir -p /esaude/infrastructure'",
+    		"echo 'esaude' | sudo -E -S bash -xcv 'chown esaude:esaude /esaude/infrastructure'"
+    	]
+    },
+    {
+	  "type": "file",
+	  "source": "../artifacts",
+	  "destination": "/esaude/infrastructure"
+	},
+	{
+      "type": "shell",
+      "script": "../artifacts/appliance/prepare-puppet.sh",
+      "execute_command": "echo 'esaude' | sudo -E -S bash -xv '{{ .Path }}'"
+    },
+	{
+	  "type": "puppet-masterless",
+	  "manifest_file": "../manifests/esaude.pp",
+	  "execute_command": "echo 'esaude' | sudo -E -S bash -xvc 'puppet apply --verbose {{.ManifestFile}} --modulepath=\"/etc/puppet/modules\" --hiera_config=\"/etc/hiera.yaml\" --detailed-exitcodes'"
+	},
+	{
+	  "type": "puppet-masterless",
+	  "manifest_file": "../manifests/esaude-appliance.pp",
+	  "execute_command": "echo 'esaude' | sudo -E -S bash -xvc 'puppet apply --verbose {{.ManifestFile}} --modulepath=\"/etc/puppet/modules\" --hiera_config=\"/etc/hiera.yaml\" --detailed-exitcodes'"
+	},
+	{
+      "type": "shell",
+      "script": "../artifacts/appliance/clean-up.sh",
+      "execute_command": "echo 'esaude' | sudo -E -S bash -xv '{{ .Path }}'"
+    }
+  ]
+}

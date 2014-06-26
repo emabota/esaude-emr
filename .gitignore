@@ -1,0 +1,5 @@
+*.iso
+*.zip
+*.war
+output-esaude-emr
+.DS_Store

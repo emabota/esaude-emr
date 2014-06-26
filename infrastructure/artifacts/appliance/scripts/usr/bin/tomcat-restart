@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo service tomcat7 restart
+read -p "Press [Enter] to return to menu..."
+
+/usr/bin/show-menu
