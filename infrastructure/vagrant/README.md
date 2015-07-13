@@ -9,3 +9,8 @@ This infrastructure code allows you to set up eSaude EMR in a test environment u
 3. Navigate to this (infrastructure/vagrant) directory
 4. Run `vagrant up`
 5. Navigate to [http://localhost:8084](http://localhost:8084)
+
+## Access
+
+* **user**: admin
+* **pass**: eSaude123

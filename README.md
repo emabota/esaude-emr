@@ -81,6 +81,11 @@ Lastly, copy the `openmrs.war` file from [here](https://s3-eu-west-1.amazonaws.c
 $ sudo service tomcat7 restart
 ```
 
+#### Access
+
+* **user**: admin
+* **pass**: eSaude123
+
 Support
 -------
 
