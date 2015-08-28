@@ -1,4 +1,4 @@
-# <img src="https://s3-eu-west-1.amazonaws.com/esaude/images/mozambican-emblem.png" height="50px"/> eSaude EMR <img src="https://s3-eu-west-1.amazonaws.com/esaude/images/mozambican-flag.png" height="45px"/>
+# <img src="https://s3-eu-west-1.amazonaws.com/esaude/images/esaude-logo.png" height="50px"/> eSaude EMR
 
 eSaude EMR is an [OpenMRS](http://www.openmrs.org/) distribution for Mozambique. This repository contains installation scripts and instructions.
 
@@ -51,10 +51,10 @@ Grant the `esaude` user all permissions on the `openmrs` database:
 GRANT ALL ON openmrs.* TO 'esaude'@'localhost' IDENTIFIED BY 'esaude';
 ```
 
-Finally, download the eSaude EMR database from [here](https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/esaude-clean-database.sql.zip), extract it and import it as follows:
+Finally, download the eSaude EMR database from [here](https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/v1.0.0/esaude-clean-database.sql.zip), extract it and import it as follows:
 
 ```
-$ mysql -uesaude -p openmrs < esaude-clean-database.sql
+$ mysql -uroot -p openmrs < esaude-clean-database.sql
 ```
 
 #### 3. Deploy eSaude EMR
@@ -73,9 +73,9 @@ connection.password=esaude
 
 Make sure `connection.username` and `connection.password` match the MySQL user you created above.
 
-Download the eSaude EMR modules [here](https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/esaude-emr-modules.zip) and copy all of the `.omod` files into the `/usr/share/tomcat7/.OpenMRS/modules/` folder.
+Download the eSaude EMR modules [here](https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/v1.0.0/esaude-emr-modules.zip) and copy all of the `.omod` files into the `/usr/share/tomcat7/.OpenMRS/modules/` folder.
 
-Lastly, copy the `openmrs.war` file from [here](https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/openmrs.war) into the `/var/lib/tomcat7/webapps/` folder and restart Tomcat. On Ubuntu, this is done as follows:
+Lastly, copy the `openmrs.war` file from [here](https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/v1.0.0/openmrs.war) into the `/var/lib/tomcat7/webapps/` folder and restart Tomcat. On Ubuntu, this is done as follows:
 
 ```
 $ sudo service tomcat7 restart
@@ -89,4 +89,4 @@ $ sudo service tomcat7 restart
 Support
 -------
 
-For support, visit http://support.esaude.org/.
+For support, visit [esaude.org](http://esaude.org) and joing the mailing list.

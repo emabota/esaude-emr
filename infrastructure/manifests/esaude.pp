@@ -13,7 +13,7 @@ Exec {
 # Grab the clean esaude database from S3
 exec { "download-esaude-database":
 	cwd	=> "/esaude/infrastructure/artifacts",
-	command	=> "wget https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/esaude-clean-database.sql.zip",
+	command	=> "wget https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/v1.0.0/esaude-clean-database.sql.zip",
 	creates => "/esaude/infrastructure/artifacts/esaude-clean-database.sql.zip",
 	timeout	=> 0
 }
@@ -21,7 +21,7 @@ exec { "download-esaude-database":
 # Grab the OpenMRS WAR from S3
 exec { "download-esaude-war":
 	cwd	=> "/esaude/infrastructure/artifacts",
-	command	=> "wget https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/openmrs.war",
+	command	=> "wget https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/v1.0.0/openmrs.war",
 	creates => "/esaude/infrastructure/artifacts/openmrs.war",
 	timeout	=> 0
 }
@@ -29,7 +29,7 @@ exec { "download-esaude-war":
 # Grab the OpenMRS modules from S3
 exec { "download-esaude-modules":
 	cwd	=> "/esaude/infrastructure/artifacts",
-	command	=> "wget https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/esaude-emr-modules.zip",
+	command	=> "wget https://s3-eu-west-1.amazonaws.com/esaude/esaude-emr/deploy-artifacts/v1.0.0/esaude-emr-modules.zip",
 	creates => "/esaude/infrastructure/artifacts/esaude-emr-modules.zip",
 	timeout	=> 0
 }

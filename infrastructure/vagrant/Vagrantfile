@@ -19,7 +19,7 @@ Vagrant::Config.run do |config|
 	# Install required puppet modules
 	config.vm.provision :shell do |shell|
   		shell.inline = "mkdir -p /etc/puppet/modules;
-           	puppet module install puppetlabs/mysql;"
+           	puppet module install puppetlabs/mysql --version 3.5.0;"
  		end
 
 	# Provisioning setup
