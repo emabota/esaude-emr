@@ -1,4 +1,4 @@
-# <img src="https://s3-eu-west-1.amazonaws.com/esaude/images/mozambican-emblem.png" height="50px"/> eSaude EMR Test Server (Ubuntu) <img src="https://s3-eu-west-1.amazonaws.com/esaude/images/mozambican-flag.png" height="45px"/>
+# <img src="https://s3-eu-west-1.amazonaws.com/esaude/images/esaude-logo.png" height="50px"/> eSaude EMR Test Server (Ubuntu)
 
 ## Setup
 
